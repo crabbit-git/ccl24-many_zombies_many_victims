@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Add a New Biting</h2>
+<h2>Record a bite</h2>
 
 <form action="/bitings" method="POST">
     <div>
-        <label for="human">Human:</label>
+        <label for="human">Victim:</label>
         <select name="human_id" id="human">
             {% for human in humans %}
             <option value="{{ human.id }}">
@@ -15,7 +15,7 @@
         </select>
     </div>
     <div>
-        <label for="zombie">Zombie:</label>
+        <label for="zombie">Assailant:</label>
         <select name="zombie_id" id="zombie">
             {% for zombie in zombies %}
             <option value="{{ zombie.id }}">

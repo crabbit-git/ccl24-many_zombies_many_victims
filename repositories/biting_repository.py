@@ -36,3 +36,9 @@ def select(id):
             zombie_repository.select(selection['zombie_id']),
             selection['id']
         )
+
+def delete_all():
+    run_sql("DELETE FROM bitings")
+
+def delete(id):
+    run_sql("DELETE FROM visits WHERE id = %s", [id])
