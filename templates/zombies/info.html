@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <h2>{{ zombie.name }}</h2>
+        <h3>Type:</h3>
+        <p>{{ zombie.zombie_type.name }}</p>
+        <h3>Victims:</h3>
+        <ul>
+            {% for victim in victims %}
+                <li>{{ victim.name }}</li>
+            {% endfor %}
+        </ul>
+        <p><a href="/zombies">Back to zombie list</a></p>
+    </section>
+{% endblock %}

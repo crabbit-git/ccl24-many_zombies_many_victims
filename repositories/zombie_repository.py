@@ -2,6 +2,7 @@ from db.run_sql import run_sql
 from models.human import Human
 from models.zombie import Zombie
 from models.zombie_type import ZombieType
+from repositories import human_repository
 import repositories.zombie_type_repository as zombie_type_repository
 
 def save(zombie):
@@ -47,3 +48,14 @@ def update(zombie):
     sql = "UPDATE zombies SET (name, zombie_type_id) = (%s, %s) WHERE id = %s"
     values = [zombie.name, zombie.zombie_type.id, zombie.id]
     run_sql(sql, values)
+
+
+def list_victims(zombie):
+    selection = run_sql(
+        "SELECT * FROM bitings WHERE zombie_id = %s",
+        [zombie.id]
+    )
+    return [
+        human_repository.select(bite['human_id'])
+        for bite in selection
+    ]
