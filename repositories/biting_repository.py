@@ -41,4 +41,9 @@ def delete_all():
     run_sql("DELETE FROM bitings")
 
 def delete(id):
-    run_sql("DELETE FROM visits WHERE id = %s", [id])
+    run_sql("DELETE FROM bitings WHERE id = %s", [id])
+
+def edit(biting):
+    sql = "UPDATE bitings SET (human_id, zombie_id) = (%s, %s) WHERE id = %s"
+    values = [biting.human.id, biting.zombie.id, biting.id]
+    run_sql(sql, values)

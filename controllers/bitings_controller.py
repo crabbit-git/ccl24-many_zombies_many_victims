@@ -33,7 +33,29 @@ def record_biting():
     return redirect("/bitings")
 
 # EDIT
+@bitings_blueprint.route("/bitings/<id>/edit", methods=['GET'])
+def goto_edit_biting(id):
+    return render_template(
+        "bitings/edit.html",
+        humans=human_repository.select_all(),
+        zombies=zombie_repository.select_all(),
+        biting=biting_repository.select(id)
+    )
 
 # UPDATE
+@bitings_blueprint.route("/bitings/<id>", methods=['POST'])
+def edit_biting(id):
+    biting_repository.edit(
+        Biting(
+            human_repository.select(request.form['human_id']),
+            zombie_repository.select(request.form['zombie_id']),
+            id
+        )
+    )
+    return redirect("/bitings")
 
 # DELETE
+@bitings_blueprint.route("/bitings/<id>/delete", methods=['POST'])
+def delete_biting(id):
+    biting_repository.delete(id)
+    return redirect("/bitings")
